@@ -17,7 +17,7 @@ class AnomalyResnet18(nn.Module):
     
     def _get_resnet18_backbone(self):
         resnet18 = models.resnet18(pretrained=True)
-        resnet18 = nn.Sequential(*list(resnet18.children())[:-1])
+        resnet18 = nn.Sequential(*list(resnet18.children())[:-1])# *list [1,2,3]-->1 2 3 
         return resnet18
 
     def forward(self, x):

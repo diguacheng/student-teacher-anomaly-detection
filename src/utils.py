@@ -11,6 +11,7 @@ def load_model(model, model_path):
         print(e)
         print('No model available.')
         print(f'Initilialisation of random weights for {model_name}.')
+        
 
 
 def increment_mean_and_var(mu_N, var_N, N, batch):

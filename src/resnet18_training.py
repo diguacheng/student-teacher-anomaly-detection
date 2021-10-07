@@ -11,6 +11,7 @@ from AnomalyDataset import AnomalyDataset
 from torchvision import transforms
 from torch.utils.data.dataloader import DataLoader
 from utils import load_model
+import os 
 
 
 def parse_arguments():
@@ -40,8 +41,18 @@ def train(args):
     # Resnet pretrained network for knowledge distillation
     resnet18 = AnomalyResnet18()
     resnet18.to(device)
+    
+    model_dir = f'../model/{args.dataset}'
+    if not os.path.exists(model_dir):
+        os.mkdir(model_dir)
 
-    # Loading saved model
+    
+    # init model 
+    # model_name = f'../model/{args.dataset}/resnet18.pt'
+    # torch.save(resnet18.state_dict(), model_name)
+    
+
+    #Loading saved model
     model_name = f'../model/{args.dataset}/resnet18.pt'
     load_model(resnet18, model_name)
 
@@ -105,7 +116,7 @@ def train(args):
             print(f"Model saved to {model_name}.")
 
         min_running_loss = min(min_running_loss, running_loss)
-        running_loss = 0.0
+        # running_loss = 0.0
 
             
 if __name__ == '__main__':
